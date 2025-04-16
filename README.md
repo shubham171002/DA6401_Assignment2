@@ -136,6 +136,9 @@ Run the command : ```python Part_B/sweep_runner.py```
 *  Wandb sweeps helped in exploring a large hyperparameter space efficiently.
 
 ## Final Results
-*  Best Training Accuracy :
-*  Best Validation Accuracy :
-*  Highest Test Accuracy on Test Dataset : 
+*  Best Training Accuracy : ~ 99%
+*  Best Validation Accuracy : ~ 86%
+*  Highest Test Accuracy on Test Dataset : ~ 85% 
+
+# Final Note
+All the experiments related to hyper parameter tuning and metric evaluation have been perfomed in kaggle jupyter environment only.
