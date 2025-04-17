@@ -29,10 +29,6 @@ Assignment_2/
 │
 ├── evaluate_best_model.py           # Train on full train set + test eval
 |
-├── results/
-│   ├── wandb_export_phase1.csv      # Sweep results - Phase 1
-│   ├── wandb_export_phase2.csv      # Sweep results - Phase 2
-|
 ├── Prediction Sample Images  
 │   ├── classwise sample images of prediction
 │
@@ -78,7 +74,6 @@ https://wandb.ai/da24m020-iit-madras/DA6401_A2/reports/DA6401-Assignment-2-Repor
 
 
 ## Final Results 
-* Best Train Accuracy : ~ 75%
 * Best Validation Accuracy : ~ 50%
 * Highest Test Accuracy on Best Model : ~ 47%
 
@@ -92,7 +87,7 @@ PartB/
 ├── data
 |  ├── train
 |  └── val 
-├── train_finetune.py          # Main training script for fine-tuning
+├── train_model.py             # Main training script for fine-tuning
 ├── sweep_config.py            # Configuration file for wandb hyperparameter sweeps
 ├── sweep_runner.py            # Script to execute sweep using wandb
 └── eval_best_model.py         # Evaluation of the best model on test dataset
@@ -127,7 +122,11 @@ Hyperparameter tuning via Weights & Biases (wandb) sweep.
 *  Reported test performance and comparison with training from scratch.
 
 ## how to Run ?
+### Step 1 : Performing sweeps using wandb
 Run the command : ```python Part_B/sweep_runner.py```
+
+### Step 2 : Evaluation of the best model on test data
+Run the command : ```python Part_B/eval_best_model.py```
 
 ## Key Observations
 *  ResNet50 performed very well and achieved validation accuracy above 85.
@@ -136,9 +135,9 @@ Run the command : ```python Part_B/sweep_runner.py```
 *  Wandb sweeps helped in exploring a large hyperparameter space efficiently.
 
 ## Final Results
-*  Best Training Accuracy : ~ 99%
 *  Best Validation Accuracy : ~ 86%
 *  Highest Test Accuracy on Test Dataset : ~ 85% 
 
 # Final Note
 All the experiments related to hyper parameter tuning and metric evaluation have been perfomed in kaggle jupyter environment only.
+All the experiments are reprocible but make sure to them in environment with powerful computational resources (15gb+ CPU and 10gb+ GPU i.e. Kaggle,Colab). 
