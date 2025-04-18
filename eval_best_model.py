@@ -113,28 +113,51 @@ def evaluate_model(model, loader, device):
 # Visualize 10x3 Prediction Grid
 def visualize_predictions(model, dataset, class_names, device):
     model.eval()
-    fig, axes = plt.subplots(10, 3, figsize=(12, 20))
 
-    for i in range(10):
-        for j in range(3):
-            ax = axes[i, j]
-            idx = random.randint(0, len(dataset) - 1)
-            image, label = dataset[idx]
-            input_img = image.unsqueeze(0).to(device)
+    # Collect all predictions with their true labels
+    all_preds = []
+    for idx in range(len(dataset)):
+        image, label = dataset[idx]
+        input_img = image.unsqueeze(0).to(device)
+        with torch.no_grad():
+            output = model(input_img)
+            pred = output.argmax(dim=1).item()
 
-            with torch.no_grad():
-                output = model(input_img)
-                pred = output.argmax(dim=1).item()
+        all_preds.append((image, label, pred))
+
+    # Shuffle the data
+    random.shuffle(all_preds)
+
+    # Collect 3 random samples per class
+    class_to_images = {i: [] for i in range(len(class_names))}
+    for image, label, pred in all_preds:
+        if len(class_to_images[label]) < 3:
+            class_to_images[label].append((image, label, pred))
+        if all(len(v) == 3 for v in class_to_images.values()):
+            break
+
+    # Plot the grid
+    fig, axes = plt.subplots(10, 3, figsize=(8, 24))
+
+    for row in range(10):
+        for col in range(3):
+            ax = axes[row, col]
+            image, true_label, pred_label = class_to_images[row][col]
 
             ax.imshow(np.transpose(image.numpy(), (1, 2, 0)))
-            ax.set_title(f"Predicted: {class_names[pred]}", fontsize=9)
+            color = "green" if pred_label == true_label else "red"
+            ax.set_title(
+                f"True: {class_names[true_label]}\nPred: {class_names[pred_label]}",
+                fontsize=9,
+                color=color
+            )
             ax.axis("off")
 
     plt.tight_layout()
     plt.show()
 
-
-# Run all steps
+    
+# Execution  of all steps 
 print("Training model on full train set")
 train_model(model, train_loader, optimizer, criterion, device)
 
