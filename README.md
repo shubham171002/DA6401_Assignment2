@@ -121,7 +121,7 @@ Hyperparameter tuning via Weights & Biases (wandb) sweep.
 *  Selected the best strategy from sweeps
 *  Reported test performance and comparison with training from scratch.
 
-## how to Run ?
+## How to Run ?
 ### Step 1 : Performing sweeps using wandb
 Run the command : ```python Part_B/sweep_runner.py```
 
@@ -138,6 +138,6 @@ Run the command : ```python Part_B/eval_best_model.py```
 *  Best Validation Accuracy : ~ 86%
 *  Highest Test Accuracy on Test Dataset : ~ 85% 
 
-# Final Note
+## Final Note
 All the experiments related to hyper parameter tuning and metric evaluation have been perfomed in kaggle jupyter environment only.
 All the experiments are reprocible but make sure to them in environment with powerful computational resources (15gb+ CPU and 10gb+ GPU i.e. Kaggle,Colab). 
